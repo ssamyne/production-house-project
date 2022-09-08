@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "bootstrap": "^5.2.1",
     "typescript-plugin-css-modules": "^3.4.0"
   }
 }
