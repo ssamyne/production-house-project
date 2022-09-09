@@ -12,6 +12,7 @@ const delay = 5000;
 
 const SlideSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState('start');
   const timeoutRef = useRef<null | number>(null);
   const vidRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const anchorRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -27,30 +28,43 @@ const SlideSection = () => {
     }
   };
 
+  const prevSlideHandler = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? videoUrl.length - 1 : prevIndex - 1
+    );
+    setDirection('prev');
+  };
+
+  const nextSlideHandler = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === videoUrl.length - 1 ? 0 : prevIndex + 1
+    );
+    setDirection('next');
+  };
+
   useEffect(() => {
     resetTimeout();
-    timeoutRef.current = window.setTimeout(
-      () =>
-        setCurrentIndex((prevIndex) =>
-          prevIndex === videoUrl.length - 1 ? 0 : prevIndex + 1
-        ),
-      delay
-    );
+    timeoutRef.current = window.setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === videoUrl.length - 1 ? 0 : prevIndex + 1
+      );
+      setDirection('next');
+    }, delay);
+
     const playOnScreen = () => {
       const currentVidRef = vidRefs.current[currentIndex];
-      const prevVidRef = vidRefs.current[currentIndex - 1];
-      const delay = 2000;
+      const otherVidRef = vidRefs.current.filter(
+        (ref) => ![currentVidRef?.id].includes(ref?.id)
+      );
 
+      if (!currentVidRef) return;
+
+      currentVidRef.currentTime = 0;
       currentVidRef?.play();
 
-      if (!prevVidRef) {
-        return;
-      }
-
-      prevVidRef.pause();
       setTimeout(() => {
-        prevVidRef.currentTime = 0;
-      }, delay);
+        otherVidRef.forEach((ref) => ref?.pause());
+      }, 800);
     };
 
     const translateSlide = () => {
@@ -59,27 +73,68 @@ const SlideSection = () => {
         currentIndex === videoUrl.length - 1
           ? anchorRefs.current[0]
           : anchorRefs.current[currentIndex + 1];
+      const prevAnchorRef =
+        currentIndex === 0
+          ? anchorRefs.current[videoUrl.length - 1]
+          : anchorRefs.current[currentIndex - 1];
       const otherAnchorRef = anchorRefs.current.filter(
-        (ref) => ![currentAnchorRef?.id, nextAnchorRef?.id].includes(ref?.id)
+        (ref) =>
+          ![
+            currentAnchorRef?.id,
+            nextAnchorRef?.id,
+            prevAnchorRef?.id,
+          ].includes(ref?.id)
       );
 
-      if (!currentAnchorRef || !nextAnchorRef || !otherAnchorRef) {
+      if (
+        !currentAnchorRef ||
+        !nextAnchorRef ||
+        !prevAnchorRef ||
+        !otherAnchorRef
+      ) {
         return;
       }
 
       currentAnchorRef.style.transform = 'translateX(0)';
       currentAnchorRef.style.opacity = '1';
+      currentAnchorRef.style.visibility = 'inherit';
 
-      nextAnchorRef.style.transform = 'translateX(100%)';
-      nextAnchorRef.style.opacity = '0';
+      if (direction === 'start') {
+        nextAnchorRef.style.transform = 'translateX(100%)';
+        nextAnchorRef.style.opacity = '0';
+        nextAnchorRef.style.visibility = 'hidden';
 
-      otherAnchorRef.forEach((ref) => {
-        if (!ref) {
-          return;
+        prevAnchorRef.style.transform = 'translateX(-100%)';
+        prevAnchorRef.style.opacity = '0';
+        prevAnchorRef.style.visibility = 'hidden';
+      } else {
+        if (direction === 'next') {
+          nextAnchorRef.style.transform = 'translateX(100%)';
+          nextAnchorRef.style.opacity = '0';
+          nextAnchorRef.style.visibility = 'hidden';
+        } else {
+          nextAnchorRef.style.transform = 'translateX(100%)';
+          nextAnchorRef.style.opacity = '1';
+          nextAnchorRef.style.visibility = 'inherit';
         }
 
+        if (direction === 'prev') {
+          prevAnchorRef.style.transform = 'translateX(-100%)';
+          prevAnchorRef.style.opacity = '0';
+          prevAnchorRef.style.visibility = 'hidden';
+        } else {
+          prevAnchorRef.style.transform = 'translateX(-100%)';
+          prevAnchorRef.style.opacity = '1';
+          prevAnchorRef.style.visibility = 'inherit';
+        }
+      }
+
+      otherAnchorRef.forEach((ref) => {
+        if (!ref) return;
+
         ref.style.transform = 'translateX(-100%)';
-        ref.style.opacity = '1';
+        ref.style.opacity = '0';
+        ref.style.visibility = 'hidden';
       });
     };
 
@@ -89,34 +144,17 @@ const SlideSection = () => {
     return () => {
       resetTimeout();
     };
-  }, [currentIndex]);
+  }, [currentIndex, direction]);
 
   return (
     <div className='slide'>
-      <button
-        className='slide__prev'
-        onClick={() => {
-          setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? videoUrl.length - 1 : prevIndex - 1
-          );
-        }}
-      >
+      <button className='slide__prev' onClick={prevSlideHandler}>
         &#8249;
       </button>
-      <button
-        className='slide__next'
-        onClick={() => {
-          setCurrentIndex((prevIndex) =>
-            prevIndex === videoUrl.length - 1 ? 0 : prevIndex + 1
-          );
-        }}
-      >
+      <button className='slide__next' onClick={nextSlideHandler}>
         &#8250;
       </button>
-      <div
-        className='slide__items'
-        // style={{ transform: `translate3d(${-currentIndex * 100}%, 0, 0)` }}
-      >
+      <div className='slide__items'>
         {videoUrl.map((videoUri, index) => {
           return (
             <a

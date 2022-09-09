@@ -9,7 +9,6 @@
     height: 100%;
     width: 100%;
     flex-direction: row;
-    transition: ease 1s;
   }
 
   &__link {
@@ -19,7 +18,7 @@
     height: 100%;
     width: 100%;
     display: block;
-    transition: transform 1s ease;
+    transition: transform 0.8s ease-in;
   }
 
   &__item {
@@ -41,7 +40,7 @@
 
     transition: all 0.2s;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
   }
 
   &__prev {
