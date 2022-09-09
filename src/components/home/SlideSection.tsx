@@ -13,6 +13,7 @@ const delay = 5000;
 const SlideSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState('start');
+  const [allowClick, setAllowClick] = useState(true);
   const timeoutRef = useRef<null | number>(null);
   const vidRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const anchorRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -28,7 +29,7 @@ const SlideSection = () => {
     }
   };
 
-  const prevSlideHandler = () => {
+  const prevSlideHandler = async () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? videoUrl.length - 1 : prevIndex - 1
     );
@@ -43,6 +44,7 @@ const SlideSection = () => {
   };
 
   useEffect(() => {
+    setAllowClick(false);
     resetTimeout();
     timeoutRef.current = window.setTimeout(() => {
       setCurrentIndex((prevIndex) =>
@@ -59,12 +61,17 @@ const SlideSection = () => {
 
       if (!currentVidRef) return;
 
-      currentVidRef.currentTime = 0;
-      currentVidRef?.play();
+      const playPromise = currentVidRef?.play();
 
-      setTimeout(() => {
-        otherVidRef.forEach((ref) => ref?.pause());
-      }, 800);
+      if (playPromise !== undefined) {
+        currentVidRef.currentTime = 0;
+        // currentVidRef?.play();
+        playPromise.then((_) => {
+          setTimeout(() => {
+            otherVidRef.forEach((ref) => ref?.pause());
+          }, 800);
+        });
+      }
     };
 
     const translateSlide = () => {
@@ -141,6 +148,10 @@ const SlideSection = () => {
     playOnScreen();
     translateSlide();
 
+    setTimeout(() => {
+      setAllowClick(true);
+    }, 800);
+
     return () => {
       resetTimeout();
     };
@@ -148,10 +159,18 @@ const SlideSection = () => {
 
   return (
     <div className='slide'>
-      <button className='slide__prev' onClick={prevSlideHandler}>
+      <button
+        disabled={!allowClick}
+        className='slide__prev'
+        onClick={prevSlideHandler}
+      >
         &#8249;
       </button>
-      <button className='slide__next' onClick={nextSlideHandler}>
+      <button
+        disabled={!allowClick}
+        className='slide__next'
+        onClick={nextSlideHandler}
+      >
         &#8250;
       </button>
       <div className='slide__items'>
@@ -171,6 +190,7 @@ const SlideSection = () => {
                 id={index.toString()}
                 ref={(vidId) => (vidRefs.current[index] = vidId)}
                 className='slide__item'
+                preload='none'
                 playsInline
                 muted
               >
