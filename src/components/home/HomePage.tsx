@@ -5,6 +5,7 @@ const HomePage = () => {
   return (
     <div id='home' className='home'>
       <SlideSection />
+      <div className='achieve'></div>
     </div>
   );
 };
