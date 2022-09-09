@@ -46,10 +46,12 @@ const SlideSection = () => {
   useEffect(() => {
     setAllowClick(false);
     resetTimeout();
+
     timeoutRef.current = window.setTimeout(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === videoUrl.length - 1 ? 0 : prevIndex + 1
       );
+
       setDirection('next');
     }, delay);
 
@@ -65,7 +67,7 @@ const SlideSection = () => {
 
       if (playPromise !== undefined) {
         currentVidRef.currentTime = 0;
-        // currentVidRef?.play();
+
         playPromise.then((_) => {
           setTimeout(() => {
             otherVidRef.forEach((ref) => ref?.pause());
