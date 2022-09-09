@@ -1,0 +1,17 @@
+@import '../sass/variable.scss';
+
+.navbar {
+  display: flex;
+  width: 100%;
+  max-height: min-content;
+  padding: 1rem 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($color-black, 0.8);
+
+  &__brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: $font-l;
+    color: $color-white;
+  }
+}

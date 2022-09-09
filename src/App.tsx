@@ -1,11 +1,14 @@
 import React from 'react';
 
 import HomePage from './components/home/HomePage';
+import ApplyLayout from './components/ui/ApplyLayout';
 
 const App = () => {
   return (
     <div>
-      <HomePage />
+      <ApplyLayout>
+        <HomePage />
+      </ApplyLayout>
     </div>
   );
 };

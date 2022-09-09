@@ -1,6 +1,7 @@
 //Colors
 $color-black: #000;
 $color-gray: #eeeeee;
+$color-white: #fff;
 
 //Font-size
 $font-s: 1.6rem;
@@ -8,3 +9,6 @@ $font-m: 2.4rem;
 $font-l: 3rem;
 $font-xl: 3.6rem;
 $font-xxl: 6rem;
+
+//Font-family
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');

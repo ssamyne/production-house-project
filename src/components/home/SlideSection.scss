@@ -1,0 +1,62 @@
+.slide {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  &__items {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    transition: ease 1s;
+  }
+
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: block;
+    transition: transform 1s ease;
+  }
+
+  &__item {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  &__prev,
+  &__next {
+    position: absolute;
+    width: 10rem;
+    height: 100%;
+    border: none;
+    color: $color-white;
+    font-size: 10rem;
+    background-color: transparent;
+
+    transition: all 0.2s;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  &__prev {
+    left: 0;
+
+    &:hover {
+      background-color: rgba($color-black, 0.2);
+    }
+  }
+
+  &__next {
+    right: 0;
+
+    &:hover {
+      background-color: rgba($color-black, 0.2);
+    }
+  }
+}

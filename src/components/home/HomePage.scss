@@ -1,1 +1,8 @@
 @import '../sass/variable.scss';
+@import './SlideSection.scss';
+
+.home {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
