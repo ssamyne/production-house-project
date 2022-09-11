@@ -5,19 +5,19 @@
   top: 0;
   left: 0;
   display: flex;
-  height: 8vh;
+  height: 4vh;
   width: 100%;
   max-height: max-content;
   padding: 1rem 0;
   justify-content: center;
   align-items: center;
-  background-color: $color-black;
+  background-color: rgba($color-gray-dark-1, 0.8);
   z-index: 5;
 
   &__brand {
     position: relative;
     font-family: 'Dancing Script', cursive;
-    font-size: $font-l;
+    font-size: $font-m;
     color: $color-white;
   }
 }
