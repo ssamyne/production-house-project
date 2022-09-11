@@ -1,8 +1,10 @@
 @import '../sass/variable.scss';
 @import './SlideSection.scss';
+@import './AchievementList.scss';
+@import './ContactSection.scss';
 
 .home {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
 }

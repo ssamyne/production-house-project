@@ -1,9 +1,11 @@
+@import '../sass/variable.scss';
+
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  display: block;
+  position: relative;
   width: 100%;
-  z-index: 5;
+  height: 6vh;
+  background-color: $color-black;
 }
 
 main {

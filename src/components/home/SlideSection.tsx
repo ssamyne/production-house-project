@@ -18,11 +18,6 @@ const SlideSection = () => {
   const vidRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const anchorRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  const defaultStyle = {
-    trasform: 'translateX(-100%)',
-    opacity: '1',
-  };
-
   const resetTimeout = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -71,7 +66,7 @@ const SlideSection = () => {
         playPromise.then((_) => {
           setTimeout(() => {
             otherVidRef.forEach((ref) => ref?.pause());
-          }, 800);
+          }, 600);
         });
       }
     };
@@ -152,7 +147,7 @@ const SlideSection = () => {
 
     setTimeout(() => {
       setAllowClick(true);
-    }, 800);
+    }, 600);
 
     return () => {
       resetTimeout();
@@ -186,7 +181,6 @@ const SlideSection = () => {
               target='_blank'
               rel='noreferrer'
               key={index}
-              style={defaultStyle}
             >
               <video
                 id={index.toString()}

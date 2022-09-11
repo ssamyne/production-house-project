@@ -2,6 +2,7 @@ import React from 'react';
 import './ApplyLayout.scss';
 
 import Navbar from '../layout/Navbar';
+import Footer from '../layout/Footer';
 
 interface LayoutProps {
   children: JSX.Element;
@@ -14,7 +15,9 @@ const ApplyLayout: React.FC<LayoutProps> = ({ children }) => {
         <Navbar />
       </header>
       <main>{children}</main>
-      <footer></footer>
+      <footer>
+        <Footer />
+      </footer>
     </React.Fragment>
   );
 };
