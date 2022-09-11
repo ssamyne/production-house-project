@@ -8,6 +8,10 @@
   &__toggle {
     display: none;
 
+    &:checked ~ .contact__main {
+      visibility: visible;
+    }
+
     &:checked ~ .contact__main > .contact__social {
       transform: translateY(0);
       opacity: 1;
@@ -41,6 +45,7 @@
     padding: 20px;
     padding-bottom: 0;
     margin-bottom: 20px;
+    visibility: hidden;
     z-index: -1;
   }
 
