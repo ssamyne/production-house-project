@@ -9,6 +9,10 @@
   align-items: center;
   z-index: 5;
 
+  @media (max-width: $phone) {
+    padding: 1rem 5%;
+  }
+
   &__brand {
     position: relative;
     font-family: $main-font;

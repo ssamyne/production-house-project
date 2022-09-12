@@ -28,4 +28,12 @@ $main-font: 'Chakra Petch', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   padding: 2.3rem 9%;
+
+  @media (max-width: $phone) {
+    padding: 2.3rem 5%;
+  }
 }
+
+//responsive breakpoint
+$phone: 43.75em;
+$tablet: 75em;

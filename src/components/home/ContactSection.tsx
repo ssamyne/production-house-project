@@ -4,9 +4,11 @@ const ContactSection = () => {
       <h2 className='contact__heading'>contact</h2>
       <div className='contact__main'>
         <div className='contact__address'>
-          <p className='contact__address_detail'>141 Weston St. Hartford</p>
-          <p className='contact__address_detail'>Connecticut 06101</p>
-          <p className='contact__address_detail'>United States</p>
+          <div>
+            <p className='contact__address_detail'>141 Weston St. Hartford</p>
+            <p className='contact__address_detail'>Connecticut 06101</p>
+            <p className='contact__address_detail'>United States</p>
+          </div>
           <a
             href='https://goo.gl/maps/187q61WbR7QqA53r5'
             target='_blank'
@@ -14,7 +16,7 @@ const ContactSection = () => {
           >
             <img
               className='contact__address_map'
-              src='/images/map.png'
+              src='/images/google-map.png'
               alt='google map'
             />
           </a>

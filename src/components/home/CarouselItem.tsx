@@ -41,7 +41,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ slide, imageData }) => {
             max: 464,
             min: 0,
           },
-          items: 2,
+          items: 3,
           partialVisibilityGutter: 30,
         },
         tablet: {
@@ -49,7 +49,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ slide, imageData }) => {
             max: 1024,
             min: 464,
           },
-          items: 3,
+          items: 4,
           partialVisibilityGutter: 30,
         },
       }}

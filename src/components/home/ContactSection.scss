@@ -7,26 +7,52 @@
   }
 
   &__main {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     padding: 0 9% 4rem;
+
+    @media (max-width: $tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, max-content);
+    }
+
+    @media (max-width: $phone) {
+      padding: 0 5% 4rem;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, max-content);
+    }
   }
 
   &__address,
   &__tel,
   &__social {
     height: 50vh;
-    width: 33.33%;
+    width: 100%;
     padding: 2rem;
+
+    @media (max-width: $phone) {
+      height: min-content;
+    }
   }
 
   &__address {
     background-color: $color-gray;
+
+    @media (max-width: $phone) {
+      display: flex;
+    }
 
     &_detail {
       font-family: 'Cairo', sans-serif;
       font-size: $font-m;
       font-weight: 300;
       color: $color-gray-dark;
+    }
+    a {
+      @media (max-width: $phone) {
+        margin: auto;
+        width: 50%;
+      }
     }
 
     &_map {
@@ -35,6 +61,11 @@
       width: 100%;
       margin-top: 2rem;
       object-fit: none;
+
+      @media (max-width: $phone) {
+        margin: 0;
+        height: 20vw;
+      }
     }
   }
 
@@ -55,8 +86,23 @@
     display: flex;
     flex-direction: column;
 
+    @media (max-width: $tablet) {
+      justify-self: center;
+      grid-column: 1 / -1;
+      width: 100%;
+      align-items: center;
+    }
+
+    @media (max-width: $phone) {
+      flex-direction: row;
+    }
+
     &_header {
       display: flex;
+
+      @media (max-width: $tablet) {
+        width: 50%;
+      }
     }
 
     &_link {
@@ -78,11 +124,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      @media (max-width: $phone) {
+        width: 50%;
+      }
     }
 
     &_qr {
       width: 12vw;
-      height: max-content;
+
+      @media (max-width: $tablet) {
+        width: 18vw;
+      }
     }
   }
 }
