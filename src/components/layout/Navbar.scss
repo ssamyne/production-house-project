@@ -1,23 +1,20 @@
 @import '../sass/variable.scss';
 
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
   display: flex;
-  height: 4vh;
+  height: 8vh;
   width: 100%;
   max-height: max-content;
-  padding: 1rem 0;
-  justify-content: center;
+  padding: 1rem 2rem;
   align-items: center;
-  background-color: rgba($color-gray-dark-1, 0.8);
   z-index: 5;
 
   &__brand {
     position: relative;
-    font-family: 'Dancing Script', cursive;
+    font-family: $main-font;
     font-size: $font-m;
-    color: $color-white;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $color-black;
   }
 }
