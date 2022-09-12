@@ -18,8 +18,10 @@ $font-xxl: 6rem;
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
 $main-font: 'Chakra Petch', sans-serif;
+$sub-font: 'Ubuntu', sans-serif;
 
 //Heading
 @mixin mainheading {
@@ -34,6 +36,20 @@ $main-font: 'Chakra Petch', sans-serif;
   }
 }
 
+@mixin subheading {
+  font-family: $sub-font;
+  font-size: $font-xxl;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0.8rem 1.5rem rgba($color-black, 0.4);
+
+  @media (max-width: $mid-screen) {
+    font-size: $font-xl;
+  }
+}
+
 //responsive breakpoint
 $phone: 43.75em;
 $tablet: 75em;
+$mid-screen: 100em;

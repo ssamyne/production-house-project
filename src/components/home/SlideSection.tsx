@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import './HomePage.scss';
 
 const videoUrl = [
-  '/videos/Woman-58142.mp4',
-  '/videos/Cow-130238.mp4',
-  '/videos/Jellyfish-110877.mp4',
-  '/videos/Skate-110734.mp4',
-  '/videos/Sand-73847.mp4',
+  '/videos/vid-1.mp4',
+  '/videos/vid-2.mp4',
+  '/videos/vid-3.mp4',
+  '/videos/vid-4.mp4',
+  '/videos/vid-5.mp4',
 ];
 const delay = 7000;
 
@@ -99,14 +99,16 @@ const SlideSection = () => {
         return;
       }
 
-      currentAnchorRef.style.transform = 'translateX(0) scale(1.2)';
+      currentAnchorRef.style.transform =
+        'translateX(0) perspective(3000px) scale(1.2)';
       currentAnchorRef.style.opacity = '1';
       currentAnchorRef.style.visibility = 'inherit';
       currentAnchorRef.style.zIndex = '2';
       currentAnchorRef.style.boxShadow =
         'rgba(50, 50, 93, 0.35) 0px 13px 27px -5px, rgba(0, 0, 0, 0.35) 0px 8px 16px -8px';
 
-      nextAnchorRef.style.transform = 'translateX(100%)';
+      nextAnchorRef.style.transform =
+        'translateX(50%) perspective(2000px) scaleZ(1.5) rotateY(-30deg)';
       nextAnchorRef.style.opacity = '1';
       nextAnchorRef.style.visibility = 'inherit';
       nextAnchorRef.style.boxShadow =
@@ -118,7 +120,8 @@ const SlideSection = () => {
         nextAnchorRef.style.zIndex = '1';
       }
 
-      prevAnchorRef.style.transform = 'translateX(-100%)';
+      prevAnchorRef.style.transform =
+        'translateX(-50%) perspective(2000px) scaleZ(1.5) rotateY(30deg)';
       prevAnchorRef.style.opacity = '1';
       prevAnchorRef.style.visibility = 'inherit';
       prevAnchorRef.style.boxShadow =
@@ -194,6 +197,7 @@ const SlideSection = () => {
           );
         })}
       </div>
+      <h1 className='slide__heading'>finesse productions</h1>
     </div>
   );
 };
