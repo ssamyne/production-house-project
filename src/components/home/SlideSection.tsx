@@ -154,21 +154,21 @@ const SlideSection = () => {
 
   return (
     <div className='slide'>
-      <button
-        disabled={!allowClick}
-        className='slide__prev'
-        onClick={prevSlideHandler}
-      >
-        &#8249;
-      </button>
-      <button
-        disabled={!allowClick}
-        className='slide__next'
-        onClick={nextSlideHandler}
-      >
-        &#8250;
-      </button>
       <div className='slide__items'>
+        <button
+          disabled={!allowClick}
+          className='slide__prev'
+          onClick={prevSlideHandler}
+        >
+          &#8249;
+        </button>
+        <button
+          disabled={!allowClick}
+          className='slide__next'
+          onClick={nextSlideHandler}
+        >
+          &#8250;
+        </button>
         {videoUrl.map((videoUri, index) => {
           return (
             <a
