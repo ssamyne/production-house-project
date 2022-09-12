@@ -5,9 +5,9 @@ const AchievementList = () => {
   return (
     <div id='our-projects' className='achieve'>
       <h2 className='achieve__heading'>our projects</h2>
-      <CarouselItem imageData={imageDataSet} slide={0.1} />
-      <CarouselItem imageData={imageDataSet} slide={0.2} />
-      <CarouselItem imageData={imageDataSet} slide={0.15} />
+      <CarouselItem imageData={imageDataSet} slide={0.1} reverse={false} />
+      <CarouselItem imageData={imageDataSet} slide={0.15} reverse={true} />
+      <CarouselItem imageData={imageDataSet} slide={0.15} reverse={false} />
     </div>
   );
 };

@@ -3,9 +3,14 @@ import Carousel from 'react-multi-carousel';
 interface CarouselItemProps {
   slide: number;
   imageData: string[];
+  reverse: boolean;
 }
 
-const CarouselItem: React.FC<CarouselItemProps> = ({ slide, imageData }) => {
+const CarouselItem: React.FC<CarouselItemProps> = ({
+  slide,
+  imageData,
+  reverse,
+}) => {
   return (
     <Carousel
       additionalTransfrom={0}
@@ -53,9 +58,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ slide, imageData }) => {
           partialVisibilityGutter: 30,
         },
       }}
-      rewind={false}
-      rewindWithAnimation={false}
-      rtl={false}
+      rtl={reverse}
       shouldResetAutoplay={false}
       showDots={false}
       sliderClass='achieve__list'
