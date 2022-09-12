@@ -5,7 +5,7 @@
   height: 8vh;
   width: 100%;
   max-height: max-content;
-  padding: 1rem 2rem;
+  padding: 1rem 9%;
   align-items: center;
   z-index: 5;
 
@@ -16,5 +16,30 @@
     font-weight: 700;
     text-transform: uppercase;
     color: $color-black;
+  }
+
+  &__links {
+    margin-left: auto;
+  }
+
+  &__link {
+    position: relative;
+    font-family: $main-font;
+    font-size: $font-s;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $color-black;
+    padding: 0.3rem 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+
+    &:hover,
+    &:target {
+      border-bottom: 2px solid $color-black;
+    }
   }
 }

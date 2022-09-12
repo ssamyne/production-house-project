@@ -1,13 +1,23 @@
 .achieve {
   width: 100%;
-  background-color: $color-gray;
   overflow: hidden;
+
+  &__heading {
+    font-family: $main-font;
+    font-size: $font-l;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $color-white;
+    padding: 2.3rem 9%;
+    background-color: $color-gray-dark;
+  }
 
   &__container {
     display: flex;
     align-items: center;
     overflow: hidden;
     position: relative;
+    background-color: $color-gray;
   }
 
   &__list {
@@ -23,7 +33,7 @@
   }
 
   &__item {
-    height: 14vw;
+    height: 14.5vw;
 
     background-image: url('../../../public/images/frame.png');
     background-size: 100% 100%;

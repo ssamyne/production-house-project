@@ -8,7 +8,7 @@ const videoUrl = [
   '/videos/Skate-110734.mp4',
   '/videos/Sand-73847.mp4',
 ];
-const delay = 5000;
+const delay = 7000;
 
 const SlideSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -99,46 +99,39 @@ const SlideSection = () => {
         return;
       }
 
-      currentAnchorRef.style.transform = 'translateX(0)';
+      currentAnchorRef.style.transform = 'translateX(0) scale(1.2)';
       currentAnchorRef.style.opacity = '1';
       currentAnchorRef.style.visibility = 'inherit';
+      currentAnchorRef.style.zIndex = '2';
 
-      if (direction === 'start') {
-        nextAnchorRef.style.transform = 'translateX(100%)';
-        nextAnchorRef.style.opacity = '0';
-        nextAnchorRef.style.visibility = 'hidden';
+      nextAnchorRef.style.transform = 'translateX(100%)';
+      nextAnchorRef.style.opacity = '1';
+      nextAnchorRef.style.visibility = 'inherit';
 
-        prevAnchorRef.style.transform = 'translateX(-100%)';
-        prevAnchorRef.style.opacity = '0';
-        prevAnchorRef.style.visibility = 'hidden';
+      if (direction === 'next') {
+        nextAnchorRef.style.zIndex = '-1';
       } else {
-        if (direction === 'next') {
-          nextAnchorRef.style.transform = 'translateX(100%)';
-          nextAnchorRef.style.opacity = '0';
-          nextAnchorRef.style.visibility = 'hidden';
-        } else {
-          nextAnchorRef.style.transform = 'translateX(100%)';
-          nextAnchorRef.style.opacity = '1';
-          nextAnchorRef.style.visibility = 'inherit';
-        }
+        nextAnchorRef.style.zIndex = '1';
+      }
 
-        if (direction === 'prev') {
-          prevAnchorRef.style.transform = 'translateX(-100%)';
-          prevAnchorRef.style.opacity = '0';
-          prevAnchorRef.style.visibility = 'hidden';
-        } else {
-          prevAnchorRef.style.transform = 'translateX(-100%)';
-          prevAnchorRef.style.opacity = '1';
-          prevAnchorRef.style.visibility = 'inherit';
-        }
+      prevAnchorRef.style.transform = 'translateX(-100%)';
+      prevAnchorRef.style.opacity = '1';
+      prevAnchorRef.style.visibility = 'inherit';
+      prevAnchorRef.style.zIndex = '1';
+
+      if (direction === 'prev') {
+        prevAnchorRef.style.zIndex = '-1';
+      } else {
+        prevAnchorRef.style.zIndex = '1';
       }
 
       otherAnchorRef.forEach((ref) => {
         if (!ref) return;
 
-        ref.style.transform = 'translateX(-100%)';
-        ref.style.opacity = '0';
-        ref.style.visibility = 'hidden';
+        ref.style.transform = 'translateX(0)';
+        ref.style.opacity = '1';
+        ref.style.visibility = 'visible';
+        ref.style.zIndex = '-1';
       });
     };
 
@@ -186,7 +179,7 @@ const SlideSection = () => {
                 id={index.toString()}
                 ref={(vidId) => (vidRefs.current[index] = vidId)}
                 className='slide__item'
-                preload='none'
+                preload='metadata'
                 playsInline
                 muted
               >

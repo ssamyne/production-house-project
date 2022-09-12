@@ -1,6 +1,6 @@
 const ContactSection = () => {
   return (
-    <div className='contact'>
+    <div id='contact-us' className='contact'>
       <input
         type='checkbox'
         className='contact__toggle'
