@@ -1,6 +1,6 @@
 .achieve {
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
   padding-bottom: 6rem;
   background-color: $color-gray-dark;
 
@@ -14,7 +14,7 @@
   &__container {
     display: flex;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
     background-color: $color-gray-dark;
   }
@@ -33,10 +33,6 @@
 
   &__item {
     height: 14vw;
-
-    background-image: url('../../../public/images/frame.png');
-    background-size: 100% 100%;
-    background-repeat: repeat;
   }
 
   &__image {
@@ -44,17 +40,18 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 97%;
-    height: 70%;
+    width: 90%;
+    height: 80%;
     object-fit: cover;
     object-position: center;
-    border-radius: 0.5rem;
+    box-shadow: rgba($color-white, 0.05) 0px 0px 0px 1px,
+      rgb(209, 213, 219) 0px 0px 0px 1px inset;
     transition: all 0.3s ease;
 
     &:hover {
       transform: translate(-50%, -50%) scale(1.2);
+      box-shadow: none;
       z-index: 3;
-      border-radius: 0;
     }
   }
 }
