@@ -36,14 +36,15 @@
   &__prev,
   &__next {
     position: absolute;
+    top: 19vw;
     width: 10rem;
-    height: 80vh;
+    height: min-content;
     border: none;
     color: rgba($color-white, 1);
     font-size: 8rem;
     background-color: transparent;
 
-    transition: all 0.2s;
+    transition: transform 0.2s;
     cursor: pointer;
     z-index: 2;
   }

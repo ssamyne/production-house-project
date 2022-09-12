@@ -103,10 +103,14 @@ const SlideSection = () => {
       currentAnchorRef.style.opacity = '1';
       currentAnchorRef.style.visibility = 'inherit';
       currentAnchorRef.style.zIndex = '2';
+      currentAnchorRef.style.boxShadow =
+        'rgba(50, 50, 93, 0.1) 0px 13px 27px -5px, rgba(0, 0, 0, 0.15) 0px 8px 16px -8px';
 
       nextAnchorRef.style.transform = 'translateX(100%)';
       nextAnchorRef.style.opacity = '1';
       nextAnchorRef.style.visibility = 'inherit';
+      nextAnchorRef.style.boxShadow =
+        'rgba(50, 50, 93, 0.1) 0px 6px 12px -2px, rgba(0, 0, 0, 0.15) 0px 3px 7px -3px';
 
       if (direction === 'next') {
         nextAnchorRef.style.zIndex = '-1';
@@ -117,7 +121,8 @@ const SlideSection = () => {
       prevAnchorRef.style.transform = 'translateX(-100%)';
       prevAnchorRef.style.opacity = '1';
       prevAnchorRef.style.visibility = 'inherit';
-      prevAnchorRef.style.zIndex = '1';
+      prevAnchorRef.style.boxShadow =
+        'rgba(50, 50, 93, 0.1) 0px 6px 12px -2px, rgba(0, 0, 0, 0.15) 0px 3px 7px -3px';
 
       if (direction === 'prev') {
         prevAnchorRef.style.zIndex = '-1';
