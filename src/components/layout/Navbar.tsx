@@ -2,7 +2,7 @@ import './Navbar.scss';
 
 const Navbar = () => {
   return (
-    <div className='navbar'>
+    <div id='home' className='navbar'>
       <a href='#home' className='navbar__brand'>
         Production House
       </a>

@@ -47,11 +47,11 @@ code {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $color-black-light;
+  background: $color-gray-dark-1;
   border-radius: 20px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba($color-black-light, 0.8);
+  background: rgba($color-gray-dark-1, 0.8);
 }

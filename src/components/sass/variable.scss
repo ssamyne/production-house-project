@@ -1,10 +1,11 @@
 //Colors
 $color-black: #000;
-$color-black-light: #383838;
-$color-gray: #b4b4b4;
 $color-white: #fff;
-$color-gray-dark: #424242;
-$color-gray-dark-1: #212121;
+
+$color-gray: #dadada;
+$color-gray-light: #686868;
+$color-gray-dark: #1f1f1f;
+$color-gray-dark-1: #2c2c2c;
 
 //Font-size
 $font-s: 1.6rem;
@@ -16,5 +17,15 @@ $font-xxl: 6rem;
 //Font-family
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500&display=swap');
 
 $main-font: 'Chakra Petch', sans-serif;
+
+//Heading
+@mixin mainheading {
+  font-family: $main-font;
+  font-size: $font-l;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2.3rem 9%;
+}
