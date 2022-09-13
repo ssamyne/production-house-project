@@ -1,4 +1,24 @@
 @import '../sass/variable.scss';
 
 .spinner {
+  &__container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-white;
+  }
+
+  &__item {
+    height: 7vw;
+    width: 7vw;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-top: 5px solid $color-white;
+    border-bottom: 5px solid $color-white;
+    opacity: 0;
+    visibility: hidden;
+    animation: spinner 0.3s linear infinite;
+  }
 }
