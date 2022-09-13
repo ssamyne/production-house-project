@@ -95,14 +95,14 @@ const SlideSection = () => {
 
       //current slide
       currentAnchorRef.style.transform =
-        'translateX(0) perspective(3000px) scale(1.2)';
+        'translate3d(0, 0, 100px) perspective(3000px) scale(1.2)';
       currentAnchorRef.style.visibility = 'inherit';
       currentAnchorRef.style.zIndex = '2';
       currentAnchorRef.style.boxShadow = '0 11px 14px 5px rgba(0,0,0,0.36)';
 
       //next slide
       nextAnchorRef.style.transform =
-        'translateX(50%) perspective(2000px) scaleZ(1.5) rotateY(-30deg)';
+        'translate3d(50%, 0, 0) perspective(2000px) scaleZ(1.5) rotateY(-30deg)';
       nextAnchorRef.style.visibility = 'inherit';
       nextAnchorRef.style.boxShadow = '0 6px 9px 1px rgba(0,0,0,0.37)';
 
@@ -115,7 +115,7 @@ const SlideSection = () => {
 
       //prev slide
       prevAnchorRef.style.transform =
-        'translateX(-50%) perspective(2000px) scaleZ(1.5) rotateY(30deg)';
+        'translate3d(-50%, 0, 0) perspective(2000px) scaleZ(1.5) rotateY(30deg)';
       prevAnchorRef.style.visibility = 'inherit';
       prevAnchorRef.style.boxShadow = '0 6px 9px 1px rgba(0,0,0,0.37)';
 

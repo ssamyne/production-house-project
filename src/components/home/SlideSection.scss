@@ -25,10 +25,11 @@
     display: block;
     transition: transform 0.6s ease-out;
     backface-visibility: hidden;
-    will-change: transform;
 
     &:hover > .slide__play::before {
+      opacity: 0.8;
       visibility: visible;
+      animation: spinner 6s linear infinite;
     }
 
     &:hover > .slide__play > .slide__playbutton {
@@ -71,10 +72,9 @@
       border: 5px solid transparent;
       border-top: 5px solid $color-white;
       border-bottom: 5px solid $color-white;
-      opacity: 0.8;
+      opacity: 0;
       visibility: hidden;
-
-      animation: spinner 6s linear infinite;
+      transition: opacity 0.2s ease;
     }
   }
 
