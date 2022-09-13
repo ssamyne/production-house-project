@@ -36,20 +36,36 @@ $sub-font: 'Ubuntu', sans-serif;
   }
 }
 
-@mixin subheading {
-  font-family: $sub-font;
-  font-size: $font-xxl;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  text-shadow: 0 0.8rem 1.5rem rgba($color-black, 0.4);
-
-  @media (max-width: $mid-screen) {
-    font-size: $font-xl;
-  }
-}
-
 //responsive breakpoint
 $phone: 43.75em;
 $tablet: 75em;
 $mid-screen: 100em;
+
+//animation
+@keyframes spinner {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(720deg);
+  }
+}
+
+@keyframes showing {
+  0% {
+    opacity: inherit;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

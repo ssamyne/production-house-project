@@ -1,14 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './HomePage.scss';
-
-const videoUrl = [
-  '/videos/vid-1.mp4',
-  '/videos/vid-2.mp4',
-  '/videos/vid-3.mp4',
-  '/videos/vid-4.mp4',
-  '/videos/vid-5.mp4',
-];
-const delay = 7000;
+import { videoData } from '../VideoDatabase';
 
 const SlideSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,14 +18,14 @@ const SlideSection = () => {
 
   const prevSlideHandler = async () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? videoUrl.length - 1 : prevIndex - 1
+      prevIndex === 0 ? videoData.length - 1 : prevIndex - 1
     );
     setDirection('prev');
   };
 
   const nextSlideHandler = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === videoUrl.length - 1 ? 0 : prevIndex + 1
+      prevIndex === videoData.length - 1 ? 0 : prevIndex + 1
     );
     setDirection('next');
   };
@@ -44,12 +36,13 @@ const SlideSection = () => {
 
     timeoutRef.current = window.setTimeout(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === videoUrl.length - 1 ? 0 : prevIndex + 1
+        prevIndex === videoData.length - 1 ? 0 : prevIndex + 1
       );
 
       setDirection('next');
-    }, delay);
+    }, 6000);
 
+    //handle autoplay video
     const playOnScreen = () => {
       const currentVidRef = vidRefs.current[currentIndex];
       const otherVidRef = vidRefs.current.filter(
@@ -71,15 +64,16 @@ const SlideSection = () => {
       }
     };
 
+    // handle slide function
     const translateSlide = () => {
       const currentAnchorRef = anchorRefs.current[currentIndex];
       const nextAnchorRef =
-        currentIndex === videoUrl.length - 1
+        currentIndex === videoData.length - 1
           ? anchorRefs.current[0]
           : anchorRefs.current[currentIndex + 1];
       const prevAnchorRef =
         currentIndex === 0
-          ? anchorRefs.current[videoUrl.length - 1]
+          ? anchorRefs.current[videoData.length - 1]
           : anchorRefs.current[currentIndex - 1];
       const otherAnchorRef = anchorRefs.current.filter(
         (ref) =>
@@ -99,46 +93,45 @@ const SlideSection = () => {
         return;
       }
 
+      //current slide
       currentAnchorRef.style.transform =
         'translateX(0) perspective(3000px) scale(1.2)';
-      currentAnchorRef.style.opacity = '1';
       currentAnchorRef.style.visibility = 'inherit';
       currentAnchorRef.style.zIndex = '2';
-      currentAnchorRef.style.boxShadow =
-        'rgba(50, 50, 93, 0.35) 0px 13px 27px -5px, rgba(0, 0, 0, 0.35) 0px 8px 16px -8px';
+      currentAnchorRef.style.boxShadow = '0 11px 14px 5px rgba(0,0,0,0.36)';
 
+      //next slide
       nextAnchorRef.style.transform =
         'translateX(50%) perspective(2000px) scaleZ(1.5) rotateY(-30deg)';
-      nextAnchorRef.style.opacity = '1';
       nextAnchorRef.style.visibility = 'inherit';
-      nextAnchorRef.style.boxShadow =
-        'rgba(50, 50, 93, 0.35) 0px 6px 12px -2px, rgba(0, 0, 0, 0.35) 0px 3px 7px -3px';
+      nextAnchorRef.style.boxShadow = '0 6px 9px 1px rgba(0,0,0,0.37)';
 
+      //prevent unwanted movement
       if (direction === 'next') {
         nextAnchorRef.style.zIndex = '-1';
       } else {
         nextAnchorRef.style.zIndex = '1';
       }
 
+      //prev slide
       prevAnchorRef.style.transform =
         'translateX(-50%) perspective(2000px) scaleZ(1.5) rotateY(30deg)';
-      prevAnchorRef.style.opacity = '1';
       prevAnchorRef.style.visibility = 'inherit';
-      prevAnchorRef.style.boxShadow =
-        'rgba(50, 50, 93, 0.35) 0px 6px 12px -2px, rgba(0, 0, 0, 0.35) 0px 3px 7px -3px';
+      prevAnchorRef.style.boxShadow = '0 6px 9px 1px rgba(0,0,0,0.37)';
 
+      //prevent unwanted movement
       if (direction === 'prev') {
         prevAnchorRef.style.zIndex = '-1';
       } else {
         prevAnchorRef.style.zIndex = '1';
       }
 
+      //other slide
       otherAnchorRef.forEach((ref) => {
         if (!ref) return;
 
         ref.style.transform = 'translateX(0)';
-        ref.style.opacity = '1';
-        ref.style.visibility = 'visible';
+        ref.style.visibility = 'inherit';
         ref.style.zIndex = '-1';
       });
     };
@@ -172,7 +165,7 @@ const SlideSection = () => {
         >
           &#8250;
         </button>
-        {videoUrl.map((videoUri, index) => {
+        {videoData.map((video, index) => {
           return (
             <a
               id={index.toString()}
@@ -191,13 +184,19 @@ const SlideSection = () => {
                 playsInline
                 muted
               >
-                <source src={videoUri} type='video/mp4' />
+                <source src={video.url} type='video/mp4' />
               </video>
+              <span className='slide__play'>
+                <img
+                  className='slide__playbutton'
+                  src='/images/play-button.png'
+                  alt='play'
+                />
+              </span>
             </a>
           );
         })}
       </div>
-      <h1 className='slide__heading'>finesse productions</h1>
     </div>
   );
 };
