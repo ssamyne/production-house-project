@@ -1,6 +1,7 @@
+import React from 'react';
 import { imageDataSet } from '../ImageDatabase';
 
-const PropjectGrid = () => {
+const PropjectGrid = React.memo(() => {
   const imagename = 'img_';
   return (
     <div id='our-projects' className='project'>
@@ -16,6 +17,6 @@ const PropjectGrid = () => {
       </div>
     </div>
   );
-};
+});
 
 export default PropjectGrid;

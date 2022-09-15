@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './HomePage.scss';
 import { videoData } from '../VideoDatabase';
 
-const SlideSection = () => {
+const SlideSection: React.FC = React.memo(() => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState('start');
   const [allowClick, setAllowClick] = useState(true);
@@ -181,6 +180,7 @@ const SlideSection = () => {
                 ref={(vidId) => (vidRefs.current[index] = vidId)}
                 className='slide__item'
                 preload='metadata'
+                autoPlay
                 playsInline
                 muted
               >
@@ -199,6 +199,6 @@ const SlideSection = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SlideSection;

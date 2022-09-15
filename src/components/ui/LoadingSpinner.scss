@@ -3,7 +3,7 @@
 .spinner {
   &__container {
     display: flex;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     align-items: center;
     justify-content: center;
@@ -15,10 +15,22 @@
     width: 7vw;
     border-radius: 50%;
     border: 5px solid transparent;
-    border-top: 5px solid $color-white;
-    border-bottom: 5px solid $color-white;
-    opacity: 0;
-    visibility: hidden;
-    animation: spinner 0.3s linear infinite;
+    border-top: 5px solid $color-black;
+    border-bottom: 5px solid $color-black;
+    animation: spinnerload 3s linear infinite;
+  }
+}
+
+@keyframes spinnerload {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(720deg);
   }
 }

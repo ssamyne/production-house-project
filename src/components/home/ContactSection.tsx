@@ -1,4 +1,6 @@
-const ContactSection = () => {
+import React from 'react';
+
+const ContactSection = React.memo(() => {
   return (
     <div id='contact-us' className='contact'>
       <h2 className='contact__heading'>contact</h2>
@@ -85,6 +87,6 @@ const ContactSection = () => {
       </div>
     </div>
   );
-};
+});
 
 export default ContactSection;
