@@ -4,56 +4,32 @@ import HomePage from './components/home/HomePage';
 import ApplyLayout from './components/ui/ApplyLayout';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 
-const App = () => {
+const App = React.memo(() => {
   const [isLoaded, setIsloaded] = useState(false);
+  const [videoStatus, setVideoStatus] = useState<HTMLVideoElement | null>(null);
+
+  const videoLoadedHandler = (isload: HTMLVideoElement | null) => {
+    setVideoStatus(isload);
+  };
 
   useEffect(() => {
-    const onPageLoaded = () => {
-      setIsloaded(true);
-    };
+    console.log(videoStatus);
 
-    const DOMready = document.readyState;
-
-    if (DOMready === 'complete') {
-      onPageLoaded();
+    if (!videoStatus) {
+      setIsloaded(false);
     } else {
-      document.addEventListener('readystatechange', () => {
-        console.log(`readystate: ${document.readyState}\n`);
-      });
-
-      document.addEventListener('DOMContentLoaded', () => {
-        console.log('content loaded');
-      });
-
-      window.addEventListener('load', onPageLoaded);
-
-      return () => {
-        document.removeEventListener('readystatechange', (event) => {
-          console.log('remove1');
-        });
-
-        document.removeEventListener('DOMContentLoaded', () => {
-          console.log('remove2');
-        });
-
-        window.removeEventListener('load', () => {
-          console.log('finish');
-        });
-      };
+      setIsloaded(true);
     }
-  }, []);
+  }, [videoStatus]);
 
   return (
     <div>
-      {isLoaded ? (
-        <ApplyLayout>
-          <HomePage />
-        </ApplyLayout>
-      ) : (
-        <LoadingSpinner />
-      )}
+      {!isLoaded && <LoadingSpinner />}
+      <ApplyLayout>
+        <HomePage videoIsloaded={videoLoadedHandler} />
+      </ApplyLayout>
     </div>
   );
-};
+});
 
 export default App;

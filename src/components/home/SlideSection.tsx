@@ -1,7 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { videoData } from '../VideoDatabase';
+import axios from 'axios';
 
-const SlideSection: React.FC = React.memo(() => {
+interface SlideProps {
+  videoIsloaded: (isload: HTMLVideoElement | null) => void;
+}
+
+const SlideSection: React.FC<SlideProps> = React.memo(({ videoIsloaded }) => {
+  const [vidData, setVidData] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState('start');
   const [allowClick, setAllowClick] = useState(true);
@@ -30,6 +36,26 @@ const SlideSection: React.FC = React.memo(() => {
   };
 
   useEffect(() => {
+    const newVidUrl: string[] = [];
+    const sendRequest = (data: { title: string; url: string }[]) => {
+      data.forEach(async (item) => {
+        try {
+          const response = await axios.get(item.url, { responseType: 'blob' });
+
+          const newUrl = window.URL.createObjectURL(response.data);
+
+          newVidUrl.push(newUrl);
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    };
+
+    sendRequest(videoData);
+    setVidData(newVidUrl);
+  }, []);
+
+  useEffect(() => {
     setAllowClick(false);
     resetTimeout();
 
@@ -47,6 +73,8 @@ const SlideSection: React.FC = React.memo(() => {
       const otherVidRef = vidRefs.current.filter(
         (ref) => ![currentVidRef?.id].includes(ref?.id)
       );
+
+      videoIsloaded(currentVidRef);
 
       if (!currentVidRef) return;
 
@@ -145,7 +173,7 @@ const SlideSection: React.FC = React.memo(() => {
     return () => {
       resetTimeout();
     };
-  }, [currentIndex, direction]);
+  }, [currentIndex, direction, videoIsloaded]);
 
   return (
     <div className='slide'>
@@ -164,7 +192,7 @@ const SlideSection: React.FC = React.memo(() => {
         >
           &#8250;
         </button>
-        {videoData.map((video, index) => {
+        {vidData.map((video, index) => {
           return (
             <a
               id={index.toString()}
@@ -180,11 +208,10 @@ const SlideSection: React.FC = React.memo(() => {
                 ref={(vidId) => (vidRefs.current[index] = vidId)}
                 className='slide__item'
                 preload='metadata'
-                autoPlay
                 playsInline
                 muted
               >
-                <source src={video.url} type='video/mp4' />
+                <source src={video} type='video/mp4' />
               </video>
               <span className='slide__play'>
                 <img
