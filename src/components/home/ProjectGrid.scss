@@ -18,6 +18,16 @@
     column-gap: 2rem;
     padding: 0 9%;
 
+    @media (max-width: $tablet) {
+      row-gap: 1.5rem;
+      column-gap: 1.5rem;
+    }
+
+    @media (max-width: $phone) {
+      row-gap: 1rem;
+      column-gap: 1rem;
+    }
+
     #img {
       &_0 {
         grid-column: 1 / 3;
