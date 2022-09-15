@@ -13,8 +13,6 @@ const App = React.memo(() => {
   };
 
   useEffect(() => {
-    console.log(videoStatus);
-
     if (!videoStatus) {
       setIsloaded(false);
     } else {

@@ -35,6 +35,7 @@ const SlideSection: React.FC<SlideProps> = React.memo(({ videoIsloaded }) => {
     setDirection('next');
   };
 
+  //for prevent video redowloading to CLI || wasting transfer data
   useEffect(() => {
     const newVidUrl: string[] = [];
     const sendRequest = (data: { title: string; url: string }[]) => {
