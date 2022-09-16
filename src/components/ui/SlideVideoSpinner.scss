@@ -1,0 +1,77 @@
+@import '../sass/variable.scss';
+
+.spinner {
+  &__vidcontainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-white;
+    z-index: 1000;
+  }
+
+  &__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    text-align: center;
+    font-family: $sub-font;
+    font-size: 5vw;
+    color: $color-black;
+    animation: slidefadein 0.6s cubic-bezier(0.11, 0.69, 0.4, 0.92);
+  }
+}
+
+.loadingbar {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 40vw;
+  height: 0.4vw;
+  background-image: linear-gradient(
+    to right,
+    $color-gray,
+    $color-gray-dark-1,
+    $color-gray
+  );
+  background-size: 200%;
+  background-position: 0%;
+  opacity: 0;
+  animation: fadein 1s linear 0.6s normal forwards 1,
+    sliding 2s linear 1s infinite;
+}
+
+@keyframes slidefadein {
+  from {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, -70%);
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sliding {
+  from {
+    background-position: 0%;
+  }
+
+  to {
+    background-position: 200%;
+  }
+}

@@ -6,26 +6,44 @@ import LoadingSpinner from './components/ui/LoadingSpinner';
 
 const App = React.memo(() => {
   const [isLoaded, setIsloaded] = useState(false);
-  const [videoStatus, setVideoStatus] = useState<HTMLVideoElement | null>(null);
-
-  const videoLoadedHandler = (isload: HTMLVideoElement | null) => {
-    setVideoStatus(isload);
-  };
 
   useEffect(() => {
-    if (!videoStatus) {
-      setIsloaded(false);
-    } else {
+    const onPageLoaded = () => {
       setIsloaded(true);
+    };
+
+    const DOMready = document.readyState;
+
+    if (DOMready === 'complete') {
+      onPageLoaded();
+    } else {
+      document.addEventListener('readystatechange', () => {
+        console.log(`readystate: ${document.readyState}\n`);
+      });
+
+      window.addEventListener('load', onPageLoaded);
+
+      return () => {
+        document.removeEventListener('readystatechange', (event) => {
+          console.log('remove1');
+        });
+
+        window.removeEventListener('load', () => {
+          console.log('finish');
+        });
+      };
     }
-  }, [videoStatus]);
+  }, []);
 
   return (
     <div>
-      {!isLoaded && <LoadingSpinner />}
-      <ApplyLayout>
-        <HomePage videoIsloaded={videoLoadedHandler} />
-      </ApplyLayout>
+      {!isLoaded ? (
+        <LoadingSpinner />
+      ) : (
+        <ApplyLayout>
+          <HomePage />
+        </ApplyLayout>
+      )}
     </div>
   );
 });

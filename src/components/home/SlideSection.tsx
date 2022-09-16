@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { videoData } from '../VideoDatabase';
 import axios from 'axios';
 
-interface SlideProps {
-  videoIsloaded: (isload: HTMLVideoElement | null) => void;
-}
+import SlideVideoSpinner from '../ui/SlideVideoSpinner';
+import { videoData } from '../VideoDatabase';
 
-const SlideSection: React.FC<SlideProps> = React.memo(({ videoIsloaded }) => {
+const SlideSection: React.FC = React.memo(() => {
+  const [isLoad, setIsLoad] = useState(false);
   const [vidData, setVidData] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState('start');
@@ -75,9 +74,16 @@ const SlideSection: React.FC<SlideProps> = React.memo(({ videoIsloaded }) => {
         (ref) => ![currentVidRef?.id].includes(ref?.id)
       );
 
-      videoIsloaded(currentVidRef);
-
       if (!currentVidRef) return;
+
+      //Show video after load finish
+      setIsLoad(true);
+
+      //prevent safari show blank background video
+      otherVidRef.forEach((ref) => {
+        if (!ref) return;
+        ref.currentTime = 0.6;
+      });
 
       const playPromise = currentVidRef?.play();
 
@@ -174,10 +180,11 @@ const SlideSection: React.FC<SlideProps> = React.memo(({ videoIsloaded }) => {
     return () => {
       resetTimeout();
     };
-  }, [currentIndex, direction, videoIsloaded]);
+  }, [currentIndex, direction]);
 
   return (
     <div className='slide'>
+      {!isLoad && <SlideVideoSpinner />}
       <div className='slide__items'>
         <button
           disabled={!allowClick}

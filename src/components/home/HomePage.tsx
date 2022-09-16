@@ -5,14 +5,10 @@ import SlideSection from './SlideSection';
 import ContactSection from './ContactSection';
 import ProjectGrid from './ProjectGrid';
 
-interface HomeProps {
-  videoIsloaded: (isload: HTMLVideoElement | null) => void;
-}
-
-const HomePage: React.FC<HomeProps> = React.memo(({ videoIsloaded }) => {
+const HomePage: React.FC = React.memo(() => {
   return (
     <div className='home'>
-      <SlideSection videoIsloaded={videoIsloaded} />
+      <SlideSection />
       <ProjectGrid />
       <ContactSection />
     </div>
